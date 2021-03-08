@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState,useEffect, createRef} from "react";
 import {
   Card,
   CardActions,
@@ -10,14 +10,27 @@ import {
 } from "@material-ui/core";
 
 import useStyles from './styles';
-
+import classNames from 'classnames' ;
 
 const NewsCard = ({
   article: { description, publishedAt, source, title, url, urlToImage },
-  i,}) => {
+  i, activeArticle}) => {
     const classes = useStyles();
+    const [elRefs,setElRefs] = useState ([]) ;
+    const scrollToRef = (ref) => window.scroll(0, ref.current.offsetTop - 50);
+
+    useEffect (() => {
+setElRefs((refs)=> Array(20).fill().map((_,j) => refs[j]|| createRef())) ;
+
+     } ,  []  );
+     useEffect(() => {
+      if (i === activeArticle && elRefs[activeArticle]) {
+        scrollToRef(elRefs[activeArticle]);
+      }
+    }, [i, activeArticle, elRefs]);
+
   return (
-    <Card className={  classes.card}>
+    <Card ref={elRefs[i]} className={classNames(classes.card,activeArticle === i? classes.activeCard : null)}>
       <CardActionArea href = {url} target="_blank">
         <CardMedia className={classes.media} image = {urlToImage||'https://www.vskills.in/certification/blog/wp-content/uploads/2015/01/structure-of-a-news-report.jpg'}/>
         <div className={classes.details}>

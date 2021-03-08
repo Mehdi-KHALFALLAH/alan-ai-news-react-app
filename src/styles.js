@@ -4,14 +4,14 @@ export default makeStyles((theme) => ({
   footer: {
     textAlign: 'center',
     position: 'fixed',
-    left: 0,
+    left: 700,
     bottom: 0,
     color: 'black',
     width: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '120px',
+    height: '1200px',
     [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
@@ -19,6 +19,14 @@ export default makeStyles((theme) => ({
   link: {
     textDecoration: 'none',
     color: 'rgba(21, 101, 192)',
+    boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.1)",
+    transition: "transform 0.2s ease-in-out",
+    "&:hover": {
+        boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)",
+        backgroundColor: " #fbfbff", 
+        borderBottom: '10px solid #315ebf', 
+        transform: "scale3d(1.05, 1.05, 1)",    
+      }
   },
   image: {
     marginLeft: 20,
