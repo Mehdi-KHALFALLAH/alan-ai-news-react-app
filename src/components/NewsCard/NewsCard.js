@@ -9,15 +9,18 @@ import {
   Typography,
 } from "@material-ui/core";
 
+import useStyles from './styles';
+
+
 const NewsCard = ({
   article: { description, publishedAt, source, title, url, urlToImage },
-  i,
-}) => {
+  i,}) => {
+    const classes = useStyles();
   return (
-    <Card>
-      <CardActionArea>
-        <CardMedia image = {urlToImage||'https://www.vskills.in/certification/blog/wp-content/uploads/2015/01/structure-of-a-news-report.jpg'}/>
-        <div>
+    <Card className={  classes.card}>
+      <CardActionArea href = {url} target="_blank">
+        <CardMedia className={classes.media} image = {urlToImage||'https://www.vskills.in/certification/blog/wp-content/uploads/2015/01/structure-of-a-news-report.jpg'}/>
+        <div className={classes.details}>
           <Typography
             variant="body2"
             color="textSecondary"
@@ -29,7 +32,7 @@ const NewsCard = ({
             component="h2"
           > {source.name}</Typography>
         </div>
-        <Typography gutterBottom variant="h5">{title}</Typography>
+        <Typography className={classes.title} gutterBottom variant="h5">{title}</Typography>
         <CardContent>
           <Typography
             variant="body2"
@@ -39,9 +42,10 @@ const NewsCard = ({
         </CardContent>
       </CardActionArea>
 
-      <CardActions>
+      <CardActions className={classes.cardActions}>
         <Button size="small" color="primary"> Learn More</Button>
         <Typography variant="h5" color="textSecondary"> {i+1}</Typography>
+        
       </CardActions>
     </Card>
   );
